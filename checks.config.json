@@ -1,0 +1,10 @@
+{
+  "id": "example-checks",
+  "title": "How Example GmbH checks its controls",
+  "checks": ["branch-protection", "mfa-enforced", "tls-endpoints", "sbom-present", "dependency-updates"],
+  "every": { "default": { "period": 1, "unit": "days" } },
+  "gitlab": { "url": "https://gitlab.example.org", "groups": ["example"], "projects": [] },
+  "tls": { "endpoints": ["www.example.org"], "min-days-valid": 14 },
+  "mfa-enforced": { "max-grace-hours": 48 },
+  "dependency-updates": { "scan-job": "dependency|trivy|grype|osv|audit|scan", "bots": ["pinup-bot", "renovate-bot"], "max-days-open": 14 }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "grundschutz-starter",
+  "private": true,
+  "type": "module",
+  "description": "The grundschutz-worksheets chain, run every night with real measurements",
+  "license": "MIT",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\"",
+    "chain": "node chain.mjs"
+  }
+}

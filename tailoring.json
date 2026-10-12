@@ -1,0 +1,6 @@
+{
+  "title": "Grundschutz++ tailoring of Example GmbH",
+  "applicable": ["ASST.2.3.2", "BER.5.9", "DET.5.3", "DET.5.10", "DEV.2.4", "DEV.4.3", "KONF.14.1", "KONF.14.1.1", "TEST.4.1"],
+  "not-applicable": [],
+  "parameters": {}
+}

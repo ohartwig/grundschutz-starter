@@ -1,0 +1,14 @@
+{
+  "title": "Security plan of Example GmbH",
+  "system": {
+    "id": "example-platform",
+    "name": "Example platform",
+    "description": "The source code, the pipelines and the public web endpoints of Example GmbH.",
+    "sensitivity": "moderate",
+    "information-type": { "title": "Source code and web content", "description": "Code, build artefacts and the pages served from it." },
+    "boundary": "The GitLab group example and the endpoints named in checks.config.json. Offices, laptops and people are outside.",
+    "status": "operational"
+  },
+  "components": [],
+  "report": { "presets": ["iso27001", "nis2", "soc2"], "period-days": 90, "every": "24h" }
+}
