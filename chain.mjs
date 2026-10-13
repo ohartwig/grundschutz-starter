@@ -92,7 +92,11 @@ put("tailoring.json", { ...json("tailoring.json"), catalog, ...meta });
 gen("profile.json", `${ws}/profile.mjs`, [`${out}/tailoring.json`]);
 
 // 2. The assessment plan, from the checks the config enables.
-const config = { ...json("checks.config.json"), catalog, ...meta, ssp: { href: "security-plan.json" }, plan: { href: "assessment-plan.json", file: "assessment-plan.json" } };
+// CHECKS_CONFIG: a path to use instead of checks.config.json -- in CI a file
+// variable, so an installation can measure its real instance while the file in
+// the repository stays the example.
+const configFile = process.env.CHECKS_CONFIG || "checks.config.json";
+const config = { ...json(configFile), catalog, ...meta, ssp: { href: "security-plan.json" }, plan: { href: "assessment-plan.json", file: "assessment-plan.json" } };
 put("checks.config.json", config);
 gen("checks.json", `${ck}/run.mjs`, ["--plan", "--config", `${out}/checks.config.json`]) &&
   gen("assessment-plan.json", `${ws}/assessment-plan.mjs`, [`${out}/checks.json`]);
