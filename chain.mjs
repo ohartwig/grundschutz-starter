@@ -46,7 +46,13 @@ const fetchTool = (pin, dir) => {
   if (existsSync(`${dir}/.git`) && sh("git", ["-C", dir, "rev-parse", "HEAD"]).trim() === pin.commit) return dir;
   rmSync(dir, { recursive: true, force: true });
   sh("git", ["init", "-q", dir]);
-  sh("git", ["-C", dir, "fetch", "-q", "--depth", "1", pin.repository, pin.commit]);
+  // A tool on this GitLab is private: in CI fetch it with the job token.
+  let url = pin.repository;
+  const host = process.env.CI_SERVER_HOST;
+  if (host && process.env.CI_JOB_TOKEN && url.startsWith(`https://${host}/`)) {
+    url = url.replace(`https://${host}/`, `https://gitlab-ci-token:${process.env.CI_JOB_TOKEN}@${host}/`);
+  }
+  sh("git", ["-C", dir, "fetch", "-q", "--depth", "1", url, pin.commit]);
   sh("git", ["-C", dir, "checkout", "-q", "FETCH_HEAD"]);
   if (existsSync(`${dir}/package-lock.json`)) sh("npm", ["ci", "--silent", "--no-audit", "--no-fund"], { cwd: dir });
   return dir;
