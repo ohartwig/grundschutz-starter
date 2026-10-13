@@ -1,0 +1,8 @@
+// Rules for this repository's Markdown. A file of our own stops the lint job
+// from injecting its built-in config. Prose is written one paragraph per line.
+{
+  "default": true,
+  "MD013": false,
+  "MD033": false,
+  "MD041": false
+}

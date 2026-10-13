@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-FileCopyrightText: 2026 Kai Ole Hartwig <mail@ole-hartwig.eu>
+// SPDX-License-Identifier: MIT
 // The whole chain, once a night: from your tailoring and your system
 // description to an OSCAL package with tonight's measurements in it, and a
 // report over the period behind it.

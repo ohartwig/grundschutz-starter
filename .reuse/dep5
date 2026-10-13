@@ -1,0 +1,7 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: grundschutz-starter
+Source: https://github.com/ohartwig/grundschutz-starter
+
+Files: *.json *.md *.jsonc .gitignore .mise.toml lefthook.yml .gitlab/* .gitsigners .gitsigners.d/* .well-known/* .yasrt.yaml
+Copyright: 2026 Kai Ole Hartwig <mail@ole-hartwig.eu>
+License: MIT

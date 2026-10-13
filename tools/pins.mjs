@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-FileCopyrightText: 2026 Kai Ole Hartwig <mail@ole-hartwig.eu>
+// SPDX-License-Identifier: MIT
 // The two tools this starter runs, each at one commit of its public
 // repository: grundschutz-worksheets writes the OSCAL, grundschutz-checks
 // measures. pinup (or Renovate) announces a newer commit as a merge request,
