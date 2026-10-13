@@ -23,8 +23,10 @@ registry.
 
 Then, in GitLab:
 
-1. Settings > CI/CD > Variables: `GITLAB_TOKEN`, masked and protected, a token
-   with `read_api` on the groups you named. Nothing more: no check writes.
+1. Settings > CI/CD > Variables: `CHECKS_GITLAB_TOKEN`, masked and protected, a
+   token with `read_api` on the groups you named. Nothing more: no check writes.
+   (The pipeline hands it to the chain as `GITLAB_TOKEN`; a group-wide
+   `GITLAB_TOKEN` is deliberately not used.)
 2. Build > Pipeline schedules: daily, on the default branch.
 
 ## What runs
