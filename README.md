@@ -14,7 +14,7 @@ registry.
 ## What you fill in
 
 | File | What it says |
-|---|---|
+| --- | --- |
 | `tailoring.json` | Which Grundschutz++ requirements apply to you, which do not and why, and your values for the catalog's blanks (`profile.mjs` of worksheets). The example lists the nine the checks measure. |
 | `system.json` | Your system: name, boundary, sensitivity, components; and `report`: the standards to report coverage for (presets of worksheets: `iso27001`, `nis2`, `dora`, `c5`, `soc2`, ...), the period in days, the cadence you promise. |
 | `checks.config.json` | What the [checks](https://github.com/ohartwig/grundschutz-checks) look at: your GitLab and its groups, your TLS endpoints, the limits, deliberate exceptions with their reasons. |
