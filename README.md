@@ -23,11 +23,14 @@ registry.
 
 Then, in GitLab:
 
-1. Settings > CI/CD > Variables: `CHECKS_GITLAB_TOKEN`, masked and protected, a
+1. Optionally, Settings > CI/CD > Variables: `CHECKS_CONFIG` as a **file**
+   variable holding your real `checks.config.json`, if the file in the
+   repository should stay as it is (this starter keeps its example that way).
+2. Settings > CI/CD > Variables: `CHECKS_GITLAB_TOKEN`, masked and protected, a
    token with `read_api` on the groups you named. Nothing more: no check writes.
    (The pipeline hands it to the chain as `GITLAB_TOKEN`; a group-wide
    `GITLAB_TOKEN` is deliberately not used.)
-2. Build > Pipeline schedules: daily, on the default branch.
+3. Build > Pipeline schedules: daily, on the default branch.
 
 ## What runs
 
