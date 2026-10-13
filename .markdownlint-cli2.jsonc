@@ -1,0 +1,14 @@
+// The runner options. `ignores` is honoured only here, not in .markdownlint.jsonc.
+// The .gitlab/ templates and SECURITY.md come from devops/repo-templates and
+// are overwritten by its sync; CHANGELOG.md is written by yasrt.
+{
+  "ignores": [
+    "**/node_modules/**",
+    ".tools/**",
+    "out/**",
+    "SECURITY.md",
+    "CHANGELOG.md",
+    ".gitlab/issue_templates/**",
+    ".gitlab/merge_request_templates/**"
+  ]
+}

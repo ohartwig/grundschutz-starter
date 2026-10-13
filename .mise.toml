@@ -1,0 +1,21 @@
+# Kai Ole Hartwig repo tool-version manifest (Phase 13.2).
+#
+# mise (https://mise.jdx.dev) reads this file for local dev. CI's
+# build-prepare also parses [tools] (php, node) and uses them as the
+# highest-priority source for PHP_VERSION / NODE_VERSION exports.
+#
+# Override priority (highest first):
+#   1. .mise.toml [tools]       — this file
+#   2. .nvmrc                   — legacy node pin
+#   3. composer.json config.platform.php
+#   4. composer.json require.php (lower bound)
+#
+# Install mise:    https://mise.jdx.dev/getting-started.html
+# Activate in repo: `mise install` once cloned; mise auto-activates on cd
+# when shimmed in your shell (`eval "$(mise activate zsh)"`).
+
+[tools]
+php      = "8.5"
+node     = "24"
+composer = "2.10"
+npm      = "11"

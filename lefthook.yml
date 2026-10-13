@@ -1,0 +1,69 @@
+# Kai Ole Hartwig pre-commit + pre-push hook manifest (Phase 12.3).
+#
+# lefthook (https://lefthook.dev) gives us a first defense line locally
+# so common CI failures (style, secrets, malformed config) get caught
+# before push. CI still re-runs all of these as the authoritative gate.
+#
+# Install once per machine: `mise install` (lefthook is pulled in via
+# .mise.toml [tools]) — or `brew install lefthook` / `go install`.
+# Activate per repo: `lefthook install`. Hook scripts live in .git/hooks
+# but stay tracked in version control via this file.
+#
+# Skip a single commit (when you know what you're doing):
+#   LEFTHOOK=0 git commit ...
+
+pre-commit:
+  parallel: true
+  commands:
+    editorconfig:
+      glob: "*"
+      run: docker run --rm -v "$PWD:/check:ro" mstruebing/editorconfig-checker:v3.11.3 ec {staged_files}
+      stage_fixed: false
+    secrets-gitleaks:
+      run: docker run --rm -v "$PWD:/check:ro" zricethezav/gitleaks:latest protect --staged --no-banner --redact -s /check
+    markdownlint:
+      glob: "*.md"
+      run: docker run --rm -v "$PWD:/check:ro" davidanson/markdownlint-cli2:v0.23.3 {staged_files}
+    prettier-json:
+      glob: "*.{json,jsonc}"
+      run: npx -y prettier --check {staged_files}
+      stage_fixed: false
+
+commit-msg:
+  commands:
+    commitlint:
+      run: |
+        # commitlint installed via mise/npm or composer; falls back to a
+        # local regex check if neither is available.
+        if command -v commitlint >/dev/null 2>&1; then
+          commitlint --edit {1}
+        else
+          head -1 {1} | grep -qE '^(feat|fix|docs|style|refactor|perf|test|ci|chore|build|revert)(\([^)]+\))?!?: .+' \
+            || { echo "Commit subject must follow Conventional Commits (feat/fix/docs/.../chore[!?][(<scope>)]: <subject>)"; exit 1; }
+        fi
+
+pre-push:
+  parallel: true
+  commands:
+    composer-audit:
+      glob: "composer.{json,lock}"
+      run: |
+        if [ -f composer.lock ]; then
+          docker run --rm -v "$PWD:/app:ro" -w /app registry.ole-hartwig.eu/devops/images/franken-php/ci:8.5 composer audit --no-dev --format=plain
+        fi
+    trivy-fs:
+      run: docker run --rm -v "$PWD:/scan:ro" aquasec/trivy:latest fs --severity HIGH,CRITICAL --exit-code 1 /scan
+      # opt-in via `LEFTHOOK_ALLOW_TRIVY=1 git push`
+      skip:
+        - run: test "${LEFTHOOK_ALLOW_TRIVY:-0}" != "1"
+    commit-signing-check:
+      # SDLC gap G-SDLC-002 — local hint only, does not block the commit.
+      run: |
+        FMT=$(git config --get gpg.format 2>/dev/null || true)
+        KEY=$(git config --get user.signingkey 2>/dev/null || true)
+        SIGN=$(git config --get commit.gpgsign 2>/dev/null || true)
+        if [ -z "$FMT" ] || [ -z "$KEY" ] || [ "$SIGN" != "true" ]; then
+          echo "[commit-signing] WARNING: signing config incomplete (see igs/engineering/commit-signing-policy.md)"
+        fi
+      stage_fixed: false
+      interactive: false
