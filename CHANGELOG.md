@@ -1,3 +1,9 @@
+## [0.1.1](https://github.com/ohartwig/grundschutz-starter/compare/v0.1.0...v0.1.1) (2026-10-16)
+
+### :repeat: Chores
+
+* **repo-templates:** sync
+
 ## [0.1.0] (2026-10-13)
 
 ### :sparkles: Features
