@@ -23,7 +23,7 @@ pre-commit:
       run: docker run --rm -v "$PWD:/check:ro" zricethezav/gitleaks:latest protect --staged --no-banner --redact -s /check
     markdownlint:
       glob: "*.md"
-      run: docker run --rm -v "$PWD:/check:ro" davidanson/markdownlint-cli2:v0.23.3 {staged_files}
+      run: docker run --rm -v "$PWD:/check:ro" davidanson/markdownlint-cli2:v0.24.0 {staged_files}
     prettier-json:
       glob: "*.{json,jsonc}"
       run: npx -y prettier --check {staged_files}
