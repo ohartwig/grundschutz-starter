@@ -1,3 +1,9 @@
+## [0.1.7](https://github.com/ohartwig/grundschutz-starter/compare/v0.1.6...v0.1.7) (2026-10-23)
+
+### :repeat: Chores
+
+* **deps:** update ohartwig/grundschutz-checks digest to f53b53c
+
 ## [0.1.6](https://github.com/ohartwig/grundschutz-starter/compare/v0.1.5...v0.1.6) (2026-10-23)
 
 ### :repeat: Chores
