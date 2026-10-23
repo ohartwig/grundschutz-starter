@@ -13,7 +13,7 @@ import { fileURLToPath } from "node:url";
 export const WORKSHEETS = {
   repository: "https://github.com/ohartwig/grundschutz-worksheets",
   // renovate: datasource=git-refs depName=ohartwig/grundschutz-worksheets packageName=https://github.com/ohartwig/grundschutz-worksheets branch=main
-  commit: "41f68ea2cacdb15c57ebc55854902065a835d23e",
+  commit: "8c8915d655b8a5645660bdb3a996a4b0ee2e7026",
 };
 
 export const CHECKS = {
