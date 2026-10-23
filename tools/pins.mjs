@@ -19,7 +19,7 @@ export const WORKSHEETS = {
 export const CHECKS = {
   repository: "https://github.com/ohartwig/grundschutz-checks",
   // renovate: datasource=git-refs depName=ohartwig/grundschutz-checks packageName=https://github.com/ohartwig/grundschutz-checks branch=main
-  commit: "43c6149462ec1a7350c05c45cbf869bf96a43386",
+  commit: "ca9b631b35009708363021529be0fbcc40cf1ff1",
 };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) console.log(`worksheets ${WORKSHEETS.commit}\nchecks ${CHECKS.commit}`);
