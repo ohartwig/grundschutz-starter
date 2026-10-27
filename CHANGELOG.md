@@ -1,3 +1,18 @@
+## [0.2.1](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.0...v0.2.1) (2026-10-27)
+
+### :bug: Fixes
+
+* **ci:** give lint:eslint something to run
+
+### :repeat: Continuous Integrations
+
+* mirror to github.com/ohartwig/grundschutz-starter
+
+### :repeat: Chores
+
+* **deps:** update ohartwig/grundschutz-worksheets digest to 71eec2b
+* **deps:** update ohartwig/grundschutz-checks digest to c659263
+
 ## [0.2.0](https://github.com/ohartwig/grundschutz-starter/compare/v0.1.14...v0.2.0) (2026-10-27)
 
 ### :sparkles: Features
