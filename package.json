@@ -7,6 +7,14 @@
   "engines": { "node": ">=24" },
   "scripts": {
     "test": "node --test \"test/*.test.mjs\"",
-    "chain": "node chain.mjs"
+    "chain": "node chain.mjs",
+    "lint:eslint": "eslint .",
+    "lint:eslint.report.junit": "mkdir -p reports && eslint . -f junit -o reports/eslintreport.junit.xml"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.13.0",
+    "eslint-formatter-junit": "9.0.1",
+    "globals": "17.13.0"
   }
 }
