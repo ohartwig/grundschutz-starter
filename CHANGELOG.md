@@ -1,3 +1,9 @@
+## [0.2.0](https://github.com/ohartwig/grundschutz-starter/compare/v0.1.14...v0.2.0) (2026-10-27)
+
+### :sparkles: Features
+
+* report on BSI-Standard 300-1 and let a package be checked by it
+
 ## [0.1.14](https://github.com/ohartwig/grundschutz-starter/compare/v0.1.13...v0.1.14) (2026-10-24)
 
 ### :repeat: Chores
