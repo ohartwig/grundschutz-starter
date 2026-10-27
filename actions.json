@@ -1,0 +1,7 @@
+{
+  "source": "Improvement register",
+  "items": [
+    { "id": "I-1", "title": "Dependency scans in every project", "requirements": ["DET.5.3", "DET.5.10"], "due": "2026-12-15", "status": "in-progress", "owner": "J. Doe" },
+    { "id": "I-2", "title": "An SBOM for every release", "requirements": ["ASST.2.3.2", "DEV.4.3"], "due": "2027-01-31", "status": "open", "owner": "A. Roe" }
+  ]
+}
