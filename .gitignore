@@ -2,3 +2,4 @@ out/
 .tools/
 results/
 node_modules/
+reports/
