@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-27",
+  "source": "Review of the Statement of Applicability",
+  "by": "J. Doe, information security officer",
+  "requirements": [
+    { "id": "KONF.14.1", "state": "implemented", "note": "Every public endpoint serves TLS 1.2 or later; the tls-endpoints check measures it nightly." },
+    { "id": "BER.5.9", "state": "implemented", "note": "GitLab enforces two-factor authentication for the group example." },
+    {
+      "id": "DET.5.3",
+      "state": "partial",
+      "note": "Dependency scans run in the web projects; the remaining projects follow with action I-1.",
+      "nonfulfilment": "temporary",
+      "approved": { "by": "Management", "date": "2026-10-20" }
+    },
+    {
+      "id": "TEST.4.1",
+      "state": "planned",
+      "note": "With two developers, a second approval of every critical change would stop releases whenever one is away.",
+      "by": "A. Roe, managing director",
+      "date": "2026-10-20",
+      "nonfulfilment": "permanent",
+      "risk": "R-004",
+      "approved": { "by": "Management", "date": "2026-10-20" }
+    }
+  ]
+}

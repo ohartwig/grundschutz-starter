@@ -10,11 +10,14 @@
 //   the checks          ->  results-<check>.json   (checks run.mjs, results.mjs)
 //   system.json         ->  security-plan.json     (ssp.mjs, with tonight's results)
 //   actions.json        ->  poam.json              (poam.mjs; the file is optional)
+//   reviews.json        ->  into the security plan (the owner's verdicts; optional)
 //   report.presets      ->  coverage-<preset>.md   (coverage.mjs, per standard)
 //   report.period-days  ->  period.md              (period.mjs, over the stored nights)
 //
 // Everything lands in out/, is validated against the NIST schema and
-// summarised in out/SUMMARY.md. Tonight's results are also put into the store
+// summarised in out/SUMMARY.md, with what the tools say about BSI-Standard
+// 300-1 (lib/method.mjs); `"method": "bsi-300-1"` in system.json makes the
+// package rule an error instead of a warning. Tonight's results are also put into the store
 // (lib/store.mjs), and the period report reads the earlier nights back from it.
 //
 //   node chain.mjs [--store dir:results | gitlab] [--day YYYY-MM-DD]
@@ -36,6 +39,7 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { CHECKS, WORKSHEETS } from "./tools/pins.mjs";
 import { day, daysBack, openStore } from "./lib/store.mjs";
+import { methodLines, methodSummary, strictFor } from "./lib/method.mjs";
 
 const args = process.argv.slice(2);
 const opt = (k, d) => (args.includes(k) ? args[args.indexOf(k) + 1] : d);
@@ -71,21 +75,40 @@ const step = (ok, what, detail = "") => {
   console.log(`${ok ? "ok  " : "FAIL"} ${what}${ok || !detail ? "" : `\n${detail}`}`);
   return ok;
 };
-// A step whose output is a file in out/.
+// A step whose output is a file in out/. What a step that succeeded says on
+// stderr -- warnings, counts -- goes into the job log too, and what of it
+// speaks about BSI-Standard 300-1 into the summary.
+const said = [];
 const gen = (file, script, a, cwd) => {
   const r = node([script, ...a], { cwd });
   if (r.status === 0) put(file, r.stdout);
-  return step(r.status === 0, file, r.stderr) ? r : null;
+  said.push(...methodLines(r.stderr));
+  const ok = step(r.status === 0, file, r.stderr);
+  if (ok && r.stderr.trim()) console.log(r.stderr.trimEnd().replace(/^/gm, "     "));
+  return ok ? r : null;
 };
 
 const catalog = { path: "control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json", commit: LIBRARY.commit };
 const system = json("system.json");
 const report = { presets: [], "period-days": 90, every: "24h", ...system.report };
 const meta = { version: today, "last-modified": `${today}T00:00:00Z` };
+const method = system.method ?? "benchmark";
+let strict = false;
+try {
+  strict = strictFor(method);
+} catch (e) {
+  step(false, "system.json", e.message);
+}
+// A worksheets pin from before the standard would ignore --strict: no package
+// rule would be checked, and nothing would say so.
+if (strict && !readFileSync(`${ws}/profile.mjs`, "utf8").includes("--strict"))
+  step(false, `method ${method}: the pinned grundschutz-worksheets cannot check the package rule yet`);
 
 // 1. The tailoring as a profile, at the library commit the tools are tested at.
+// With method bsi-300-1, a package without what the standard puts into every
+// package is an error (BSI-Standard 300-1, 3.4.1); by default a warning.
 put("tailoring.json", { ...json("tailoring.json"), catalog, ...meta });
-gen("profile.json", `${ws}/profile.mjs`, [`${out}/tailoring.json`]);
+gen("profile.json", `${ws}/profile.mjs`, [`${out}/tailoring.json`, ...(strict ? ["--strict"] : [])]);
 
 // 2. The assessment plan, from the checks the config enables.
 // CHECKS_CONFIG: a path to use instead of checks.config.json -- in CI a file
@@ -125,10 +148,11 @@ put("system.json", {
   ...system,
   ...meta,
   report: undefined,
+  method: undefined,
   profile: { file: "profile.json", href: "profile.json" },
   components: (system.components ?? []).map(rel),
   results,
-  reviews: rel(system.reviews),
+  reviews: rel(system.reviews ?? (existsSync("reviews.json") ? "reviews.json" : undefined)),
   inventory: rel(system.inventory),
 });
 if (existsSync(`${out}/profile.json`)) gen("security-plan.json", `${ws}/ssp.mjs`, [`${out}/system.json`]);
@@ -183,6 +207,7 @@ put(
     "",
     ...lines,
     "",
+    ...methodSummary(method, said),
     ...report.presets.flatMap((p) => [`## Coverage: ${p}`, "", ...head(`coverage-${p}.md`), ""]),
     `## Period: ${since} to ${today}, ${history.length} stored result(s)`,
     "",
