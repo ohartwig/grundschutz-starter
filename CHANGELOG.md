@@ -1,3 +1,9 @@
+## [0.2.13](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.12...v0.2.13) (2026-10-31)
+
+### :repeat: Chores
+
+* **deps:** update ohartwig/grundschutz-checks digest to 400f1c0
+
 ## [0.2.12](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.11...v0.2.12) (2026-10-31)
 
 ### :repeat: Chores
