@@ -17,13 +17,24 @@ pre-commit:
   commands:
     editorconfig:
       glob: "*"
-      run: docker run --rm -v "$PWD:/check:ro" mstruebing/editorconfig-checker:v3.11.3 ec {staged_files}
+      # renovate: datasource=docker depName=registry.ole-hartwig.eu/devops/ci-mirrors/editorconfig-checker
+      run: docker run --rm -v "$PWD:/check:ro" -w /check registry.ole-hartwig.eu/devops/ci-mirrors/editorconfig-checker:v3.11.3@sha256:b3128d82e0518b81df28d245200d86de4bf361f065668be1d1626aacd47b785e ec {staged_files}
       stage_fixed: false
-    secrets-gitleaks:
-      run: docker run --rm -v "$PWD:/check:ro" zricethezav/gitleaks:latest protect --staged --no-banner --redact -s /check
+    # The same scanner as the CI gate (test-tools/test-secret-scan), from our
+    # own mirror and pinned by digest. Until 2026-11-03 this pulled
+    # zricethezav/gitleaks:latest from Docker Hub: an unpinned image from a
+    # third-party registry, run with the repository mounted, on every commit.
+    # verified + unknown: a key the provider confirms, or one it could not be
+    # asked about; plain pattern matches without either stay out, as in CI.
+    # --no-update: the binary must not replace itself inside the hook.
+    secrets-trufflehog:
+      glob: "*"
+      # renovate: datasource=docker depName=registry.ole-hartwig.eu/devops/ci-mirrors/trufflehog
+      run: docker run --rm -v "$PWD:/check:ro" -w /check registry.ole-hartwig.eu/devops/ci-mirrors/trufflehog:v3.97.1-dev@sha256:2f20eb12ad6fc780e8771910e2788a42168ab3dd3396128d4fa65f5183ac26e4 filesystem --no-update --results=verified,unknown --fail {staged_files}
     markdownlint:
       glob: "*.md"
-      run: docker run --rm -v "$PWD:/check:ro" davidanson/markdownlint-cli2:v0.24.0 {staged_files}
+      # renovate: datasource=docker depName=registry.ole-hartwig.eu/devops/ci-mirrors/markdownlint-cli2
+      run: docker run --rm -v "$PWD:/check:ro" -w /check registry.ole-hartwig.eu/devops/ci-mirrors/markdownlint-cli2:v0.24.0@sha256:70ead7c0352d22d04bbe612cd96b54ec591538d8f4626cafe391bb2ecf3639ca {staged_files}
     prettier-json:
       glob: "*.{json,jsonc}"
       run: npx -y prettier --check {staged_files}
@@ -52,7 +63,8 @@ pre-push:
           docker run --rm -v "$PWD:/app:ro" -w /app registry.ole-hartwig.eu/devops/images/franken-php/ci:8.5 composer audit --no-dev --format=plain
         fi
     trivy-fs:
-      run: docker run --rm -v "$PWD:/scan:ro" aquasec/trivy:latest fs --severity HIGH,CRITICAL --exit-code 1 /scan
+      # renovate: datasource=docker depName=registry.ole-hartwig.eu/devops/ci-mirrors/trivy
+      run: docker run --rm -v "$PWD:/scan:ro" registry.ole-hartwig.eu/devops/ci-mirrors/trivy:v0.74.0@sha256:62b1e65e8869bc4b4c6aa4fa2b21595256c7c2f6018a9d9ad61caf87187c1969 fs --severity HIGH,CRITICAL --exit-code 1 /scan
       # opt-in via `LEFTHOOK_ALLOW_TRIVY=1 git push`
       skip:
         - run: test "${LEFTHOOK_ALLOW_TRIVY:-0}" != "1"
