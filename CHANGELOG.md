@@ -1,3 +1,11 @@
+## [0.2.21](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.20...v0.2.21) (2026-11-03)
+
+### :repeat: Chores
+
+* **deps:** update ohartwig/grundschutz-worksheets digest to 57bdf11
+* **deps:** update ohartwig/grundschutz-checks digest to 130e038
+* **deps:** update dependency eslint to v10.14.0
+
 ## [0.2.20](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.19...v0.2.20) (2026-11-02)
 
 ### :repeat: Chores
