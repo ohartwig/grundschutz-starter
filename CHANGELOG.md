@@ -1,3 +1,9 @@
+## [0.2.24](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.23...v0.2.24) (2026-11-03)
+
+### :repeat: Chores
+
+* **deps:** update ohartwig/grundschutz-checks digest to cb1cca2
+
 ## [0.2.23](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.22...v0.2.23) (2026-11-03)
 
 ### :repeat: Chores
