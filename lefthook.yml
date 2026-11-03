@@ -18,7 +18,7 @@ pre-commit:
     editorconfig:
       glob: "*"
       # renovate: datasource=docker depName=registry.ole-hartwig.eu/devops/ci-mirrors/editorconfig-checker
-      run: docker run --rm -v "$PWD:/check:ro" -w /check registry.ole-hartwig.eu/devops/ci-mirrors/editorconfig-checker:v3.11.3@sha256:b3128d82e0518b81df28d245200d86de4bf361f065668be1d1626aacd47b785e ec {staged_files}
+      run: docker run --rm --network none -v "$PWD:/check:ro" -w /check registry.ole-hartwig.eu/devops/ci-mirrors/editorconfig-checker:v3.11.3@sha256:b3128d82e0518b81df28d245200d86de4bf361f065668be1d1626aacd47b785e ec {staged_files}
       stage_fixed: false
     # The same scanner as the CI gate (test-tools/test-secret-scan), from our
     # own mirror and pinned by digest. Until 2026-11-03 this pulled
@@ -34,10 +34,12 @@ pre-commit:
     markdownlint:
       glob: "*.md"
       # renovate: datasource=docker depName=registry.ole-hartwig.eu/devops/ci-mirrors/markdownlint-cli2
-      run: docker run --rm -v "$PWD:/check:ro" -w /check registry.ole-hartwig.eu/devops/ci-mirrors/markdownlint-cli2:v0.24.0@sha256:70ead7c0352d22d04bbe612cd96b54ec591538d8f4626cafe391bb2ecf3639ca {staged_files}
+      run: docker run --rm --network none -v "$PWD:/check:ro" -w /check registry.ole-hartwig.eu/devops/ci-mirrors/markdownlint-cli2:v0.24.0@sha256:70ead7c0352d22d04bbe612cd96b54ec591538d8f4626cafe391bb2ecf3639ca {staged_files}
     prettier-json:
       glob: "*.{json,jsonc}"
-      run: npx -y prettier --check {staged_files}
+      # Exact version: npx -y with a bare name runs whatever is newest.
+      # renovate: datasource=npm depName=prettier
+      run: npx -y prettier@3.9.10 --check {staged_files}
       stage_fixed: false
 
 commit-msg:
