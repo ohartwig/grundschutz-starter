@@ -65,7 +65,7 @@ pre-push:
           # renovate: datasource=docker depName=registry.ole-hartwig.eu/devops/images/franken-php/ci
           # A bare `8.5` tag does not exist (checked 2026-11-03): the image is
           # published as <version>-<php>, so this line could never pull.
-          docker run --rm -v "$PWD:/app:ro" -w /app registry.ole-hartwig.eu/devops/images/franken-php/ci:3.2.143-8.5@sha256:29de6be228dfae9885453116abeac8eb15559e52de78d9cf933260f5c998ed3a composer audit --no-dev --format=plain
+          docker run --rm -v "$PWD:/app:ro" -w /app registry.ole-hartwig.eu/devops/images/franken-php/ci:3.2.144-8.5@sha256:091e0c39be9c76ab6061bf67f76f985c2880f800621819cd9cb5ccfa0c40e570 composer audit --no-dev --format=plain
         fi
     trivy-fs:
       # renovate: datasource=docker depName=registry.ole-hartwig.eu/devops/ci-mirrors/trivy
