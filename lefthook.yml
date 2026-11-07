@@ -62,14 +62,14 @@ pre-push:
       glob: "composer.{json,lock}"
       run: |
         if [ -f composer.lock ]; then
-          # The rolling PHP-line tag, deliberately without a pin or an
-          # annotation (owner decision, 2026-11-07). A local hook gains nothing
-          # from an exact pin. With one, every franken-php/ci release became a
-          # bump in each of the ~90 repositories carrying this file, about 80 %
-          # of the bumps behind that image. `8.5` has been published since
-          # 2026-11 and follows the newest 3.x-8.5 release. pinup's lefthook
-          # manager reads only three-part tags, so it leaves this line alone.
-          docker run --rm -v "$PWD:/app:ro" -w /app registry.ole-hartwig.eu/devops/images/franken-php/ci:8.5 composer audit --no-dev --format=plain
+          # Pinned by version and digest: the hooks run no mutable image
+          # (AUD-080-F03, I-681), and a rolling tag would undo that. pinup's
+          # lefthook manager moves this pin, and the lefthook rule in its
+          # default preset holds every lefthook.yml bump to one merge request
+          # per repository per week (Monday 00-05), so a franken-php/ci
+          # release no longer opens a bump in every consumer (owner decision,
+          # 2026-11-07, replacing the rolling `8.5` tag of the same day).
+          docker run --rm -v "$PWD:/app:ro" -w /app registry.ole-hartwig.eu/devops/images/franken-php/ci:3.2.154-8.5@sha256:f9c456eed8d63dc3b25aa578fb924ab3250e45c497dbf3ba246b683282a44e29 composer audit --no-dev --format=plain
         fi
     trivy-fs:
       # renovate: datasource=docker depName=registry.ole-hartwig.eu/devops/ci-mirrors/trivy
