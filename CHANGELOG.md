@@ -1,3 +1,9 @@
+## [0.2.52](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.51...v0.2.52) (2026-11-09)
+
+### :repeat: Chores
+
+* **deps:** update dependency registry.ole-hartwig.eu/devops/images/franken-php/ci to v3.2.172-8.5
+
 ## [0.2.51](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.50...v0.2.51) (2026-11-09)
 
 ### :repeat: Chores
