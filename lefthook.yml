@@ -69,7 +69,7 @@ pre-push:
           # per repository per week (Monday 00-05), so a franken-php/ci
           # release no longer opens a bump in every consumer (owner decision,
           # 2026-11-07, replacing the rolling `8.5` tag of the same day).
-          docker run --rm -v "$PWD:/app:ro" -w /app registry.ole-hartwig.eu/devops/images/franken-php/ci:3.2.154-8.5@sha256:f9c456eed8d63dc3b25aa578fb924ab3250e45c497dbf3ba246b683282a44e29 composer audit --no-dev --format=plain
+          docker run --rm -v "$PWD:/app:ro" -w /app registry.ole-hartwig.eu/devops/images/franken-php/ci:3.2.171-8.5@sha256:29825f25ccc1fde32477b0f43c40e61b08184011d1e6c179944e29b40f178491 composer audit --no-dev --format=plain
         fi
     trivy-fs:
       # renovate: datasource=docker depName=registry.ole-hartwig.eu/devops/ci-mirrors/trivy
