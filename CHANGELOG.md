@@ -1,3 +1,9 @@
+## [0.2.62](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.61...v0.2.62) (2026-11-12)
+
+### :repeat: Chores
+
+* **security:** record VEX not_affected for minimatch CVE-2026-118764
+
 ## [0.2.61](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.60...v0.2.61) (2026-11-12)
 
 ### :repeat: Chores
