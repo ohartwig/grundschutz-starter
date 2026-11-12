@@ -1,3 +1,10 @@
+## [0.2.60](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.59...v0.2.60) (2026-11-12)
+
+### :repeat: Chores
+
+* **deps:** update ohartwig/grundschutz-worksheets digest to 588d388
+* **deps:** update ohartwig/grundschutz-checks digest to 555376a
+
 ## [0.2.59](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.58...v0.2.59) (2026-11-11)
 
 ### :repeat: Chores
