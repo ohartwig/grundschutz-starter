@@ -1,3 +1,9 @@
+## [0.2.64](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.63...v0.2.64) (2026-11-13)
+
+### :repeat: Chores
+
+* **deps:** refresh lock file (transitive deps, e.g. guzzle)
+
 ## [0.2.63](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.62...v0.2.63) (2026-11-13)
 
 ### :repeat: Chores
