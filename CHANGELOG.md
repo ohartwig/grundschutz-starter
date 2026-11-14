@@ -1,3 +1,11 @@
+## [0.2.65](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.64...v0.2.65) (2026-11-14)
+
+### :repeat: Chores
+
+* **deps:** update ohartwig/grundschutz-worksheets digest to 1d49014
+* **deps:** update ohartwig/grundschutz-checks digest to ceec130
+* **deps:** refresh lock file (transitive deps, e.g. guzzle) [security]
+
 ## [0.2.64](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.63...v0.2.64) (2026-11-13)
 
 ### :repeat: Chores
