@@ -1,3 +1,9 @@
+## [0.2.80](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.79...v0.2.80) (2026-11-20)
+
+### :repeat: Chores
+
+* **repo-templates:** sync
+
 ## [0.2.79](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.78...v0.2.79) (2026-11-20)
 
 ### :repeat: Chores
