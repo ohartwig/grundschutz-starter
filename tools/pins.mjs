@@ -13,13 +13,13 @@ import { fileURLToPath } from "node:url";
 export const WORKSHEETS = {
   repository: "https://github.com/ohartwig/grundschutz-worksheets",
   // renovate: datasource=git-refs depName=ohartwig/grundschutz-worksheets packageName=https://github.com/ohartwig/grundschutz-worksheets branch=main
-  commit: "562264900d1763ff5aebc8064ae62b6cbb8fe833",
+  commit: "5b335c6fe087704b4a58a2100cf9ccf09a9eb8cf",
 };
 
 export const CHECKS = {
   repository: "https://github.com/ohartwig/grundschutz-checks",
   // renovate: datasource=git-refs depName=ohartwig/grundschutz-checks packageName=https://github.com/ohartwig/grundschutz-checks branch=main
-  commit: "15a6536785cc048104a79809d962118bd88a749e",
+  commit: "f2f0c3a2115cf35e1665e25e566b879a23244f58",
 };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) console.log(`worksheets ${WORKSHEETS.commit}\nchecks ${CHECKS.commit}`);
