@@ -1,3 +1,9 @@
+## [0.2.88](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.87...v0.2.88) (2026-11-23)
+
+### :bug: Fixes
+
+* the SBOM requirement is ASST.2.4 now, with the tools at that catalog
+
 ## [0.2.87](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.86...v0.2.87) (2026-11-23)
 
 ### :repeat: Chores
