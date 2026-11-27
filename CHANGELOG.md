@@ -1,3 +1,9 @@
+## [0.2.94](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.93...v0.2.94) (2026-11-27)
+
+### :repeat: Chores
+
+* **deps:** update ohartwig/grundschutz-checks digest to d07a97d
+
 ## [0.2.93](https://github.com/ohartwig/grundschutz-starter/compare/v0.2.92...v0.2.93) (2026-11-27)
 
 ### :repeat: Chores
